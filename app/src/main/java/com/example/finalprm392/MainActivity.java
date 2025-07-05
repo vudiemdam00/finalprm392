@@ -61,7 +61,19 @@ public class MainActivity extends AppCompatActivity {
         mBackPressed = System.currentTimeMillis();
     }
 
+    private void persistAppdata(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
 
+        database = RoomDB.getInstance(this);
+        AppData appData = new AppData(database);
+        int last = prefs.getInt(AppData.LAST_VERSION, 0);
+        if(!prefs.getBoolean((MyConstants.FIRST_TIME_CAMEL_CASE, false))){
+            appData.persistAllData();;
+            editor.putBoolean(MyConstants.FIRST_TIME_CAMEL_CASE, true);
+        }
+
+    }
 
     private void addAddTitles(){
         titles = new ArrayList<>();
