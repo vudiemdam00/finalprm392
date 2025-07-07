@@ -75,6 +75,12 @@ public class CheckList extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+         onBackPressed();
+         return  true;
+    }
+
     private void addNewItem(String itemName){
         Items items = new Items();
         items.setChecked(false);
