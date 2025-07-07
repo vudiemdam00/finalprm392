@@ -6,52 +6,55 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(tableName = "iteams")
+@Entity(tableName = "items")  // ✅ sửa lại chính tả
 public class Items implements Serializable {
+
     @PrimaryKey(autoGenerate = true)
-    int ID = 0;
-    @ColumnInfo(name = "itaemname")
-    String iteamname;
+    private int id = 0;
+
+    @ColumnInfo(name = "itemname")  // ✅ sửa từ itaemname
+    private String itemname;
+
     @ColumnInfo(name = "category")
-    String category;
+    private String category;
 
     @ColumnInfo(name = "addedby")
-    String addedby;
+    private String addedby;
 
     @ColumnInfo(name = "checked")
-    Boolean checked = false;
+    private Boolean checked = false;
 
     public Items() {
     }
 
-    public Items(String iteamname, String category, String addedby, Boolean checked) {
-        this.iteamname = iteamname;
+    public Items(String itemname, String category, String addedby, Boolean checked) {
+        this.itemname = itemname;
         this.category = category;
         this.addedby = addedby;
         this.checked = checked;
     }
 
-    public Items(String iteamname, String category, Boolean checked) {
+    public Items(String itemname, String category, Boolean checked) {
         this.addedby = "system";
-        this.iteamname = iteamname;
+        this.itemname = itemname;
         this.category = category;
         this.checked = checked;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getIteamname() {
-        return iteamname;
+    public String getItemname() {
+        return itemname;
     }
 
-    public void setIteamname(String iteamname) {
-        this.iteamname = iteamname;
+    public void setItemname(String itemname) {
+        this.itemname = itemname;
     }
 
     public String getCategory() {

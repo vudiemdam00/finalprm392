@@ -13,22 +13,31 @@ import java.util.List;
 
 @Dao
 public interface ItemsDAO {
+
     @Insert(onConflict = REPLACE)
     void saveItem(Items items);
-    @Query("select * from items where category=:category order by id asc")
+
+    @Query("SELECT * FROM items WHERE category = :category ORDER BY id ASC")
     List<Items> getAll(String category);
+
     @Delete
     void delete(Items items);
-    @Query("update items set checked=:checked where ID=:id")
+
+    @Query("UPDATE items SET checked = :checked WHERE id = :id")
     void checkUncheck(int id, boolean checked);
-    @Query("select count(*) from items")
+
+    @Query("SELECT COUNT(*) FROM items")
     Integer getItemsCount();
-    @Query("delete from items where addedby=:addedBy")
+
+    @Query("DELETE FROM items WHERE addedby = :addedBy")
     Integer deleteAllSystemItems(String addedBy);
-    @Query("delete from items where category=:category")
+
+    @Query("DELETE FROM items WHERE category = :category")
     Integer deleteAllByCategory(String category);
-    @Query("delete from items where category-:category and addedby=:addedby")
+
+    @Query("DELETE FROM items WHERE category = :category AND addedby = :addedby")
     Integer deleteAllByCategoryAndAddedBy(String category, String addedby);
-    @Query("select * from items where checked=:checked order by id asc")
+
+    @Query("SELECT * FROM items WHERE checked = :checked ORDER BY id ASC")
     List<Items> getAllSelected(boolean checked);
 }

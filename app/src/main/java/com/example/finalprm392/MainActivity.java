@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         addAllImages();
         persistAppdata();
         database = RoomDB.getInstance(this);
-        System.out.println("------------------------->"+database.mainDAO().getAllSelected(false).get(0).getIteamname());
+        System.out.println("------------------------->"+database.mainDAO().getAllSelected(false).get(0).getItemname());
 
         adapter = new Adapter(this,titles, images,MainActivity.this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2, GridLayoutManager.VERTICAL, false);
