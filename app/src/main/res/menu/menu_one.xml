@@ -23,5 +23,5 @@
         android:title="Search"
         android:icon="@drawable/search_icon"
         app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="android.widget.SearchView"/>
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 </menu>
