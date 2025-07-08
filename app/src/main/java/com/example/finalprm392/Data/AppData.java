@@ -118,7 +118,7 @@ public class AppData extends Application {
         List<String> list = Arrays.asList(data);
         List<Items> dataList = new ArrayList<>();
         dataList.clear();
-        for (int i = 0; i<=list.size();i++){
+        for (int i = 0; i<list.size();i++){
             dataList.add(new Items(list.get(i), category, false));
         }
         return dataList;
