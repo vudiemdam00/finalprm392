@@ -1,6 +1,7 @@
 package com.example.finalprm392;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -132,8 +133,26 @@ public class CheckList extends AppCompatActivity {
                         }
                     }).setIcon(R.drawable.warning).show();
             return  true;
+        } else if (id == R.id.btnAboutUs) {
+            intent = new Intent(this, AboutUs.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.btnExit) {
+            this.finishAffinity();
+            Toast.makeText(this, "Pack your bag\nExit completed", Toast.LENGTH_SHORT).show();
+            return true;
+        }else {
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101){
+            itemsList = database.mainDAO().getAll(header);
+            updateRecycler(itemsList);
+        }
     }
 
     @Override
