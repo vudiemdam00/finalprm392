@@ -32,19 +32,18 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    testImplementation(libs.junit)
+    implementation("com.google.android.material:material:1.11.0")
+
+    implementation("androidx.cardview:cardview:1.0.0") // 👈 thêm dòng này
 
     implementation("androidx.room:room-runtime:2.7.2")
-
-    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-    // See Add the KSP plugin to your project
     annotationProcessor("androidx.room:room-compiler:2.7.2")
 
+    testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

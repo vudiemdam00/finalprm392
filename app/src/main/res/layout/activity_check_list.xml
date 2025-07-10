@@ -4,41 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E3ACAC"
+    android:background="#F5F5F5"
     tools:context=".CheckList">
 
-
+    <!-- Danh sách -->
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:layout_marginBottom="60dp"/>
+        android:layout_marginBottom="80dp"
+        android:padding="8dp"
+        android:clipToPadding="false" />
+
+    <!-- Thanh nhập và nút thêm -->
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout"
-        android:background="#FFD6D6">
+        android:background="#B3E5FC"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:gravity="center_vertical">
 
         <EditText
             android:id="@+id/txtAdd"
             android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="wrap_content"
-            android:hint="Enter Item to add..."
-            android:textSize="22sp"
-            android:layout_marginLeft="8dp"
-            android:textStyle="bold|italic"/>
-        <Button
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Enter item to add..."
+            android:minHeight="48dp"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            android:background="@drawable/edittext_bg"
+            android:importantForAccessibility="yes" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAdd"
-            android:layout_width="0dp"
-            android:layout_weight="0.7"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_check_circle"
-            android:layout_marginEnd="8dp"/>
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_check_circle"
+            android:contentDescription="Add item"
+            android:importantForAccessibility="yes" />
+
 
     </LinearLayout>
-    
-
 </RelativeLayout>

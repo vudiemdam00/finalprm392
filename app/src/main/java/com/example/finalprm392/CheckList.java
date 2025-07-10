@@ -15,17 +15,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.SearchView;
 
 import com.example.finalprm392.Adapter.CheckListAdapter;
 import com.example.finalprm392.Constants.MyConstants;
 import com.example.finalprm392.Data.AppData;
 import com.example.finalprm392.Database.RoomDB;
 import com.example.finalprm392.Models.Items;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class CheckList extends AppCompatActivity {
     String header, show;
 
     EditText txtAdd;
-    Button  btnAdd;
+    FloatingActionButton btnAdd; // ✅ Sửa kiểu từ Button -> FloatingActionButton
     LinearLayout linearLayout;
 
     @Override
@@ -47,7 +48,7 @@ public class CheckList extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_one, menu);
 
-        if(MyConstants.MY_SELECTIONS.equals(header)){
+        if (MyConstants.MY_SELECTIONS.equals(header)) {
             menu.getItem(0).setVisible(false);
             menu.getItem(2).setVisible(false);
             menu.getItem(3).setVisible(false);
@@ -64,9 +65,9 @@ public class CheckList extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<Items > finalList = new ArrayList<>();
-                for (Items items : itemsList){
-                    if (items.getItemname().toLowerCase().startsWith(newText.toLowerCase())){
+                List<Items> finalList = new ArrayList<>();
+                for (Items items : itemsList) {
+                    if (items.getItemname().toLowerCase().startsWith(newText.toLowerCase())) {
                         finalList.add(items);
                     }
                 }
@@ -84,7 +85,7 @@ public class CheckList extends AppCompatActivity {
         Intent intent = new Intent(this, CheckList.class);
         AppData appData = new AppData(database, this);
 
-        if(id == R.id.btnMySelections ){
+        if (id == R.id.btnMySelections) {
             intent.putExtra(MyConstants.HEADER_SMALL, MyConstants.MY_SELECTIONS);
             intent.putExtra(MyConstants.SHOW_SMALL, MyConstants.FALSE_STRING);
             startActivityForResult(intent, 101);
@@ -98,7 +99,7 @@ public class CheckList extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("Delete default data")
                     .setMessage("Are you sure?\n\n" +
-                            "As this will delete the data provided by (Pack your bag) while instailling")
+                            "As this will delete the data provided by (Pack your bag) while installing")
                     .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -106,19 +107,15 @@ public class CheckList extends AppCompatActivity {
                             itemsList = database.mainDAO().getAll(header);
                             updateRecycler(itemsList);
                         }
-                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).setIcon(R.drawable.warning).show();
-            return  true;
-        } else if (id ==  R.id.btnReset) {
+                    }).setNegativeButton("Cancel", null)
+                    .setIcon(R.drawable.warning).show();
+            return true;
+        } else if (id == R.id.btnReset) {
             new AlertDialog.Builder(this)
                     .setTitle("Reset to default")
                     .setMessage("Are you sure?\n\n" +
-                            "As this will load the default data provided by (Pack your bag)" +
-                            "and will delete your custom data you have in ("+header+")")
+                            "As this will load the default data provided by (Pack your bag) " +
+                            "and will delete your custom data you have in (" + header + ")")
                     .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -126,13 +123,9 @@ public class CheckList extends AppCompatActivity {
                             itemsList = database.mainDAO().getAll(header);
                             updateRecycler(itemsList);
                         }
-                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    }).setIcon(R.drawable.warning).show();
-            return  true;
+                    }).setNegativeButton("Cancel", null)
+                    .setIcon(R.drawable.warning).show();
+            return true;
         } else if (id == R.id.btnAboutUs) {
             intent = new Intent(this, AboutUs.class);
             startActivity(intent);
@@ -141,7 +134,7 @@ public class CheckList extends AppCompatActivity {
             this.finishAffinity();
             Toast.makeText(this, "Pack your bag\nExit completed", Toast.LENGTH_SHORT).show();
             return true;
-        }else {
+        } else {
             return super.onOptionsItemSelected(item);
         }
     }
@@ -149,7 +142,7 @@ public class CheckList extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 101){
+        if (requestCode == 101) {
             itemsList = database.mainDAO().getAll(header);
             updateRecycler(itemsList);
         }
@@ -169,16 +162,16 @@ public class CheckList extends AppCompatActivity {
         getSupportActionBar().setTitle(header);
 
         txtAdd = findViewById(R.id.txtAdd);
-        btnAdd = findViewById(R.id.btnAdd);
+        btnAdd = findViewById(R.id.btnAdd); // Đã đổi kiểu trên
         recyclerView = findViewById(R.id.recyclerView);
         linearLayout = findViewById(R.id.linearLayout);
 
         database = RoomDB.getInstance(this);
 
-        if(MyConstants.FALSE_STRING.equals(show)){
+        if (MyConstants.FALSE_STRING.equals(show)) {
             linearLayout.setVisibility(View.GONE);
             itemsList = database.mainDAO().getAllSelected(true);
-        }else {
+        } else {
             itemsList = database.mainDAO().getAll(header);
         }
 
@@ -187,10 +180,10 @@ public class CheckList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String itemName = txtAdd.getText().toString();
-                if(itemName != null && !itemName.isEmpty()){
+                if (itemName != null && !itemName.isEmpty()) {
                     addNewItem(itemName);
                     Toast.makeText(CheckList.this, "Item Added.", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(CheckList.this, "Empty cannot be added.", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -199,11 +192,11 @@ public class CheckList extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-         onBackPressed();
-         return  true;
+        onBackPressed();
+        return true;
     }
 
-    private void addNewItem(String itemName){
+    private void addNewItem(String itemName) {
         Items items = new Items();
         items.setChecked(false);
         items.setCategory(header);
@@ -212,14 +205,14 @@ public class CheckList extends AppCompatActivity {
         database.mainDAO().saveItem(items);
         itemsList = database.mainDAO().getAll(header);
         updateRecycler(itemsList);
-        recyclerView.scrollToPosition(checkListAdapter.getItemCount()-1);
+        recyclerView.scrollToPosition(checkListAdapter.getItemCount() - 1);
         txtAdd.setText("");
     }
-    private void updateRecycler(List<Items> itemsList){
+
+    private void updateRecycler(List<Items> itemsList) {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL));
-        checkListAdapter=new CheckListAdapter(CheckList.this,itemsList,database,show);
+        checkListAdapter = new CheckListAdapter(CheckList.this, itemsList, database, show);
         recyclerView.setAdapter(checkListAdapter);
-
     }
 }

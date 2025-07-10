@@ -5,27 +5,46 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background3"
     tools:context=".MainActivity">
 
+    <!-- Header có bo góc đáy và bóng -->
     <TextView
+        android:id="@+id/title_view"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/wave2"
-        android:id="@+id/title_view"
-        android:textAlignment="center"
+        android:gravity="center"
         android:text="Bag and Go"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
-        android:textSize="34sp"
-        />
+        android:textSize="38sp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:shadowColor="#80000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4" />
 
+    <!-- Slogan nhỏ -->
+    <TextView
+        android:id="@+id/sub_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Let’s pack and go!"
+        android:textColor="#E0E0E0"
+        android:textSize="14sp"
+        android:layout_below="@id/title_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"
-        android:layout_below="@+id/title_view"
-        />
+        android:layout_below="@id/sub_title"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:clipToPadding="false" />
 </RelativeLayout>
