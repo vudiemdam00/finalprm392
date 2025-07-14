@@ -1,128 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutUs">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textAlignment="center"
-        android:padding="5dp"
-        android:background="#ADADAD"
-        android:text="Liên hệ qua"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-        <ImageView
-            android:id="@+id/imgYoutube"
-            android:layout_width="0dp"
-            android:layout_weight=".08"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/youtube_icon"/>
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textAlignment="center"
-        android:padding="5dp"
-        android:background="#ADADAD"
-        android:text="Inbox qua"/>
-    <TextView
-        android:id="@+id/txtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:textColor="#003B55"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textAlignment="center"
-        android:textStyle="bold|italic"
-        android:text="(de mail minh vo day)@fpt.edu.vn"
-        />
+    android:background="#F5F5F5"
+    android:padding="16dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#FF0000"
-        android:layout_marginTop="10dp">
+        android:spacing="16dp">
+
+        <!-- Liên hệ qua -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="23dp"
+            android:text="Liên hệ qua"
+            android:textSize="22sp"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:layout_margin="10dp"
-            android:textAlignment="center"
-            android:text="Pls rate us"/>
+            android:gravity="center"
+            android:padding="10dp"
+            android:background="#607D8B" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_margin="20dp">
+            android:layout_marginTop="12dp">
+
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/star_rate_icon"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/star_rate_icon"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/star_rate_icon"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/star_rate_icon"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/star_rate_icon"/>
+                android:id="@+id/imgYoutube"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@mipmap/youtube_icon"
+                android:contentDescription="Youtube" />
         </LinearLayout>
+
+        <!-- Inbox qua -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Inbox qua"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:padding="10dp"
+            android:background="#607D8B"
+            android:layout_marginTop="24dp" />
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="(de mail minh vo day)@fpt.edu.vn"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            android:textColor="#003B55"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginTop="8dp"
+            android:background="#E3F2FD"
+            android:elevation="2dp" />
+
+        <!-- Rate us section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#F44336"
+            android:layout_marginTop="24dp"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"
+            android:clipToPadding="false"
+            android:elevation="4dp"
+            android:backgroundTintMode="src_in"
+            android:backgroundTint="#D32F2F">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pls rate us"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/star_rate_icon"
+                    android:layout_margin="4dp" />
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/star_rate_icon"
+                    android:layout_margin="4dp" />
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/star_rate_icon"
+                    android:layout_margin="4dp" />
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/star_rate_icon"
+                    android:layout_margin="4dp" />
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/star_rate_icon"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Một số lời nhắn -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Một số lời nhắn"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:padding="10dp"
+            android:background="#607D8B" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Điền gì đó vô đây\n\n Điền gì đó vô đây"
+            android:textSize="18sp"
+            android:textColor="#212121"
+            android:padding="16dp"
+            android:background="#C8E6C9"
+            android:layout_marginTop="8dp"
+            android:elevation="2dp"
+            android:lineSpacingExtra="4dp"
+            android:letterSpacing="0.05" />
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textAlignment="center"
-        android:padding="5dp"
-        android:background="#ADADAD"
-        android:text="Một số lời nhắn"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textAlignment="center"
-        android:padding="5dp"
-        android:background="#8BC34A"
-        android:text="Điền gì đó vô đây\n\n Điền gì đó vô đây"/>
-</LinearLayout>
 </ScrollView>
