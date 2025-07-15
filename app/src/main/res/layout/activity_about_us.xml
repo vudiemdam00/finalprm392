@@ -57,7 +57,7 @@
             android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="(de mail minh vo day)@fpt.edu.vn"
+            android:text="tuanlvhe176257@fpt.edu.vn\n\n nhatvnhe171071@fpt.edu.vn\n\n vunhhe181069@fpt.edu.vn \n\n khiemdghe161336@fpt.edu.vn"
             android:textSize="20sp"
             android:textStyle="bold|italic"
             android:textColor="#003B55"
@@ -141,7 +141,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Điền gì đó vô đây\n\n Điền gì đó vô đây"
+            android:text="- Cảm ơn bạn đã sử dụng ứng dụng này để học tập hiệu quả hơn!\n\n - Đừng quên ôn tập mỗi ngày nhé! \n\n - Đừng ngại liên hệ để góp ý và giúp ứng dụng tốt hơn!"
             android:textSize="18sp"
             android:textColor="#212121"
             android:padding="16dp"
