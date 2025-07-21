@@ -2,6 +2,8 @@ package com.example.finalprm392;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     RoomDB database;
     Button btnBag,btnTrip;
 
+    private static final int NOTIFICATION_PERMISSION_CODE = 101;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         recyclerView = findViewById(R.id.recyclerView);
+
+        requestNotificationPermission();
 
         btnBag = findViewById(R.id.btn_bag);
         btnTrip = findViewById(R.id.btn_trip);
@@ -135,5 +143,31 @@ public class MainActivity extends AppCompatActivity {
         images.add(R.drawable.p12);
 
 
+    }
+
+    private void requestNotificationPermission() {
+        Log.d("TripNotification", "Checking notification permission...");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, "android.permission.POST_NOTIFICATIONS")
+                    != PackageManager.PERMISSION_GRANTED) {
+                Log.d("TripNotification", "Requesting POST_NOTIFICATIONS permission");
+                ActivityCompat.requestPermissions(this,
+                        new String[]{"android.permission.POST_NOTIFICATIONS"},
+                        NOTIFICATION_PERMISSION_CODE);
+            } else {
+                Log.d("TripNotification", "Permission already granted, scheduling notifications");
+                TripNotificationManager.scheduleAllTripNotifications(this);
+            }
+        } else {
+            Log.d("TripNotification", "No permission needed (pre-Android 13), scheduling notifications");
+            TripNotificationManager.scheduleAllTripNotifications(this);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d("TripNotification", "Permission result: requestCode=" + requestCode);
+        TripNotificationManager.handlePermissionResult(this, requestCode, permissions, grantResults);
     }
 }

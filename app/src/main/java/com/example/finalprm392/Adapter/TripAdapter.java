@@ -1,10 +1,12 @@
 package com.example.finalprm392.Adapter;
+import com.example.finalprm392.CheckList;
 import com.example.finalprm392.DAO.TripDAO;
 import com.example.finalprm392.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +55,14 @@ public class TripAdapter extends RecyclerView.Adapter<TripAdapter.ViewHolder> {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault());
         holder.tvTripDate.setText("Khởi hành: " + trip.getDate().format(formatter));
 
+        // 👉 Sự kiện click để chuyển sang CheckListActivity
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CheckList.class);
+            intent.putExtra("tripId", trip.getId()); // truyền ID hoặc đối tượng Trip nếu cần
+            context.startActivity(intent);
+        });
 
+        // 👉 Xử lý nút xóa
         holder.btnDelete.setOnClickListener(v -> {
             new AlertDialog.Builder(context)
                     .setTitle("Xóa chuyến đi")

@@ -42,6 +42,7 @@ public class CheckList extends AppCompatActivity {
     EditText txtAdd;
     FloatingActionButton btnAdd; // ✅ Sửa kiểu từ Button -> FloatingActionButton
     LinearLayout linearLayout;
+    int tripId = -1;
 
     @Override
     public boolean onCreatePanelMenu(int featureId, @NonNull Menu menu) {
@@ -156,22 +157,28 @@ public class CheckList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
+        tripId = intent.getIntExtra("tripId", -1);
         header = intent.getStringExtra(MyConstants.HEADER_SMALL);
         show = intent.getStringExtra(MyConstants.SHOW_SMALL);
 
         getSupportActionBar().setTitle(header);
 
         txtAdd = findViewById(R.id.txtAdd);
-        btnAdd = findViewById(R.id.btnAdd); // Đã đổi kiểu trên
+        btnAdd = findViewById(R.id.btnAdd);
         recyclerView = findViewById(R.id.recyclerView);
         linearLayout = findViewById(R.id.linearLayout);
 
         database = RoomDB.getInstance(this);
 
-        if (MyConstants.FALSE_STRING.equals(show)) {
+        if (tripId != -1) {
+            itemsList = database.mainDAO().getItemsInTrip(tripId);
+            linearLayout.setVisibility(View.GONE);
+        }
+        else if (MyConstants.FALSE_STRING.equals(show)) {
             linearLayout.setVisibility(View.GONE);
             itemsList = database.mainDAO().getAllSelected(true);
         } else {
+            getSupportActionBar().setTitle(header);
             itemsList = database.mainDAO().getAll(header);
         }
 
@@ -202,8 +209,17 @@ public class CheckList extends AppCompatActivity {
         items.setCategory(header);
         items.setItemname(itemName);
         items.setAddedby(MyConstants.USER_SMALL);
+        if (tripId != -1) {
+            items.setTripId(tripId);
+        } else {
+            items.setCategory(header);
+        }
         database.mainDAO().saveItem(items);
-        itemsList = database.mainDAO().getAll(header);
+        if (tripId != -1) {
+            itemsList = database.mainDAO().getItemsInTrip(tripId);
+        } else {
+            itemsList = database.mainDAO().getAll(header);
+        }
         updateRecycler(itemsList);
         recyclerView.scrollToPosition(checkListAdapter.getItemCount() - 1);
         txtAdd.setText("");

@@ -56,10 +56,15 @@ public class CreateTripActivity extends AppCompatActivity {
             }
 
             int selectedId = radioGroup.getCheckedRadioButtonId();
-            String bagType = (selectedId == R.id.radio_my_list) ?
-                    MyConstants.MY_LIST_CAMEL_CASE : MyConstants.MY_SELECTIONS_CAMEL_CASE;
+            List<Items> items;
 
-            List<Items> items = db.mainDAO().getAll(bagType);
+            // ✅ Xác định danh sách item theo radio được chọn
+            if (selectedId == R.id.radio_my_list) {
+                String bagType = MyConstants.MY_LIST_CAMEL_CASE;
+                items = db.mainDAO().getAll(bagType); // lấy theo category
+            } else {
+                items = db.mainDAO().getAllSelected(true); // lấy các item được đánh dấu selected
+            }
 
             String tripName = etTripName.getText().toString().trim();
             if (tripName.isEmpty()) {
@@ -79,7 +84,7 @@ public class CreateTripActivity extends AppCompatActivity {
                 ti.setPacked(false);
                 db.tripItemsDAO().insert(ti);
             }
-
+            TripNotificationManager.scheduleTripNotification(this, trip);
             Toast.makeText(this, "Trip created!", Toast.LENGTH_SHORT).show();
             finish();
         });
