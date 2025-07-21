@@ -23,7 +23,8 @@ public class Items implements Serializable {
 
     @ColumnInfo(name = "checked")
     private Boolean checked = false;
-
+    @ColumnInfo(name = "trip_id")
+    public Integer tripId;
     public Items() {
     }
 
@@ -39,6 +40,15 @@ public class Items implements Serializable {
         this.itemname = itemname;
         this.category = category;
         this.checked = checked;
+    }
+
+    public Items(String addedby, Integer tripId, String itemname, int id, Boolean checked, String category) {
+        this.addedby = addedby;
+        this.tripId = tripId;
+        this.itemname = itemname;
+        this.id = id;
+        this.checked = checked;
+        this.category = category;
     }
 
     public int getId() {
@@ -79,5 +89,13 @@ public class Items implements Serializable {
 
     public void setChecked(Boolean checked) {
         this.checked = checked;
+    }
+
+    public Integer getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Integer tripId) {
+        this.tripId = tripId;
     }
 }

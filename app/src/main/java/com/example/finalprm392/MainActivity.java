@@ -1,8 +1,11 @@
 package com.example.finalprm392;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +20,7 @@ import com.example.finalprm392.Adapter.Adapter;
 import com.example.finalprm392.Constants.MyConstants;
 import com.example.finalprm392.Data.AppData;
 import com.example.finalprm392.Database.RoomDB;
+import com.example.finalprm392.Models.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     List<Integer> images;
     Adapter  adapter;
     RoomDB database;
+    Button btnBag,btnTrip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +42,25 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         recyclerView = findViewById(R.id.recyclerView);
 
+        btnBag = findViewById(R.id.btn_bag);
+        btnTrip = findViewById(R.id.btn_trip);
+        btnBag.setEnabled(false);
+        btnTrip.setEnabled(true);
+        btnTrip.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, TripList.class);
+            startActivity(intent);
+        });
+
         addAddTitles();
         addAllImages();
         persistAppdata();
         database = RoomDB.getInstance(this);
-        System.out.println("------------------------->"+database.mainDAO().getAllSelected(false).get(0).getItemname());
-
+        List<Items> itemList = database.mainDAO().getAllSelected(false);
+        if (!itemList.isEmpty()) {
+            Log.d("DB_LOG", "First item name: " + itemList.get(0).getItemname());
+        } else {
+            Log.d("DB_LOG", "No items found with isSelected = false.");
+        }
         adapter = new Adapter(this,titles, images,MainActivity.this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);

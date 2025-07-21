@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background3"
+    tools:context=".TripList">
+
+    <!-- HEADER -->
+    <LinearLayout
+        android:id="@+id/mainHeader2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 2 Nút điều hướng -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_bag2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Bag"
+                android:enabled="true"
+                android:background="@color/white"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/btn_trip2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Go"
+                android:enabled="false"
+                android:background="@color/black"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Bag and Go"
+            android:textSize="38sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="@drawable/wave2" />
+    </LinearLayout>
+
+    <!-- RecyclerView hiển thị danh sách Trip -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTrip"
+        android:layout_below="@+id/mainHeader2"
+        android:layout_above="@+id/btn_create_trip"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginBottom="80dp" />
+
+    <!-- Nút tạo trip -->
+    <Button
+        android:id="@+id/btn_create_trip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Trip"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/black"
+        android:textColor="#FFFFFF" />
+</RelativeLayout>

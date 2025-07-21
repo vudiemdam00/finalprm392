@@ -5,11 +5,22 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.example.finalprm392.DAO.ItemsDAO;
+import com.example.finalprm392.DAO.TripDAO;
+import com.example.finalprm392.DAO.TripItemsDAO;
+import com.example.finalprm392.Models.Converters;
 import com.example.finalprm392.Models.Items;
+import com.example.finalprm392.Models.Trip;
+import com.example.finalprm392.Models.TripItems;
 
-@Database(entities = {Items.class}, version = 2, exportSchema = false)
+@Database(
+        entities = {Items.class, Trip.class, TripItems.class},
+        version = 3,
+        exportSchema = false
+)
+@TypeConverters(Converters.class)
 public abstract class RoomDB extends RoomDatabase {
 
     private static RoomDB database;
@@ -26,6 +37,7 @@ public abstract class RoomDB extends RoomDatabase {
         return database;
     }
 
-    // ✅ Tên method có thể tùy chọn, miễn sao bạn gọi đúng tên ở nơi sử dụng
     public abstract ItemsDAO mainDAO();
+    public abstract TripDAO tripDAO();
+    public abstract TripItemsDAO tripItemsDAO();
 }

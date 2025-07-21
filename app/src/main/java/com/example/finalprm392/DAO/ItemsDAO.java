@@ -7,6 +7,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+
 import com.example.finalprm392.Models.Items;
 
 import java.util.List;
@@ -40,4 +41,14 @@ public interface ItemsDAO {
 
     @Query("SELECT * FROM items WHERE checked = :checked ORDER BY id ASC")
     List<Items> getAllSelected(boolean checked);
+    // Truy xuất toàn bộ item có trong 1 trip (dùng JOIN)
+    @Query("SELECT items.* FROM items " +
+            "INNER JOIN trip_items ON items.id = trip_items.itemId " +
+            "WHERE trip_items.tripId = :tripId")
+    List<Items> getItemsInTrip(int tripId);
+
+    @Query("SELECT items.* FROM items " +
+            "INNER JOIN trip_items ON items.id = trip_items.itemId " +
+            "WHERE trip_items.tripId = :tripId AND trip_items.isPacked = 0")
+    List<Items> getUnpackedItemsInTrip(int tripId);
 }
